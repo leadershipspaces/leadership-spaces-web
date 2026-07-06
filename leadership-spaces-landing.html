@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadership Spaces — Retiro para Líderes · Suiza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-100: #f4f4f4;
+      --gray-200: #e8e8e8;
+      --gray-500: #888888;
+      --gray-700: #444444;
+      --serif: 'Georgia', serif;
+      --sans: 'Helvetica Neue', 'Arial', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--white); color: var(--black); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 2.5rem;
+      mix-blend-mode: normal;
+    }
+    .nav-logo {
+      font-family: var(--sans); font-size: 1.15rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-cta {
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.6); padding: 0.55rem 1.4rem;
+      transition: all 0.2s; border-radius: 100px;
+    }
+    .nav-cta:hover { background: var(--white); color: var(--black); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 65vh; min-height: 480px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: flex-start;
+      overflow: hidden;
+    }
+    .hero-media {
+      position: absolute; inset: 0; z-index: 0;
+      overflow: hidden;
+    }
+    .hero-media video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      object-position: center 15%;
+    }
+    .hero-media::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.2) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      padding: 0 2.5rem 4rem;
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .hero-tag {
+      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: var(--sans); font-weight: 300;
+      font-size: clamp(1.8rem, 3.8vw, 3.4rem);
+      line-height: 1.05; color: var(--white); margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 strong { font-weight: 700; }
+    .hero-pills {
+      display: flex; gap: 0.8rem; flex-wrap: wrap;
+    }
+    .pill {
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.35);
+      padding: 0.45rem 1rem; border-radius: 100px;
+    }
+
+    /* ── SPLIT: imagen + contenido ── */
+    .split {
+      display: grid; grid-template-columns: 1fr 1fr; min-height: 600px;
+    }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+
+    .split-img {
+      position: relative; overflow: hidden; min-height: 500px;
+    }
+    .split-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .split-img .badge {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: var(--black); color: var(--white);
+      width: 80px; height: 80px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em;
+      text-align: center; line-height: 1.3;
+    }
+
+    .split-content {
+      background: var(--gray-100);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem;
+    }
+    .split-content.dark { background: var(--black); }
+    .split-content.dark h2 { color: var(--white); }
+    .split-content.dark p { color: rgba(255,255,255,0.6); }
+    .split-content.dark .label { color: rgba(255,255,255,0.35); }
+
+    .label {
+      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gray-500); margin-bottom: 1.2rem; display: block;
+    }
+    h2 {
+      font-family: var(--sans); font-weight: 300; letter-spacing: -0.02em;
+      font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.15;
+      color: var(--black); margin-bottom: 1.5rem;
+    }
+    h2 strong { font-weight: 700; }
+    p { font-size: 0.95rem; color: var(--gray-700); margin-bottom: 1rem; line-height: 1.75; }
+
+    .btn {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.9rem 2rem; border-radius: 100px;
+      text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+      font-family: var(--sans);
+    }
+    .btn-dark { background: var(--black); color: var(--white); }
+    .btn-dark:hover { background: #333; }
+    .btn-white { background: var(--white); color: var(--black); }
+    .btn-white:hover { background: var(--gray-200); }
+    .btn-outline {
+      background: transparent; color: var(--black);
+      border: 1.5px solid var(--black);
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* ── SEÑALES (para quién) ── */
+    .senales { padding: 6rem 2.5rem; background: var(--white); }
+    .senales-inner { max-width: 1100px; margin: 0 auto; }
+    .senales-header {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      margin-bottom: 4rem; align-items: end;
+    }
+    .senales-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+      background: var(--gray-200); border: 1px solid var(--gray-200);
+    }
+    .senal {
+      background: var(--white); padding: 2rem 1.8rem;
+    }
+    .senal-num {
+      font-size: 2rem; font-weight: 700; color: var(--gray-200);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .senal p { font-size: 0.9rem; color: var(--gray-700); margin: 0; }
+
+    /* ── PROGRAMA ── */
+    .programa { background: var(--black); padding: 6rem 2.5rem; }
+    .programa-inner { max-width: 1100px; margin: 0 auto; }
+    .programa h2 { color: var(--white); margin-bottom: 0.5rem; }
+    .programa .label { color: rgba(255,255,255,0.35); }
+    .programa > .programa-inner > p { color: rgba(255,255,255,0.55); margin-bottom: 3rem; }
+    .dias {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .dia {
+      background: var(--black); padding: 2.5rem 2rem;
+    }
+    .dia-num {
+      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 0.8rem;
+    }
+    .dia h3 {
+      font-size: 1.1rem; font-weight: 300; color: var(--white);
+      margin-bottom: 1.5rem; letter-spacing: -0.01em;
+    }
+    .dia h3 strong { font-weight: 700; }
+    .dia ul { list-style: none; padding: 0; }
+    .dia ul li {
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      line-height: 1.5;
+    }
+    .dia ul li:last-child { border-bottom: none; }
+
+    /* ── GALERÍA ── */
+    .galeria {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 420px;
+      gap: 3px;
+    }
+    .galeria img, .galeria video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── HOTEL ── */
+    .hotel { padding: 6rem 2.5rem; background: var(--white); }
+    .hotel-inner { max-width: 1100px; margin: 0 auto; }
+    .hotel-intro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: end; margin-bottom: 3rem;
+    }
+    .hotel-intro p { margin: 0; }
+    .hotel-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 340px 280px;
+      gap: 4px;
+    }
+    .hotel-grid img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .hotel-grid img:first-child {
+      grid-row: 1 / 3;
+    }
+    .hotel-footer {
+      margin-top: 2rem; display: flex; justify-content: space-between;
+      align-items: center; padding-top: 1.5rem; border-top: 1px solid var(--gray-200);
+    }
+    .hotel-footer p { margin: 0; font-size: 0.82rem; color: var(--gray-500); }
+    .hotel-footer a {
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--black); text-decoration: none;
+      border-bottom: 1px solid var(--gray-200); padding-bottom: 0.15rem;
+    }
+    .hotel-footer a:hover { border-color: var(--black); }
+
+    /* ── FACILITADORAS ── */
+    .facilitadoras { padding: 6rem 2.5rem; background: var(--white); }
+    .facilitadoras-inner { max-width: 1100px; margin: 0 auto; }
+    .facilitadoras-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; margin-top: 3rem;
+    }
+    .facilitadora-card { display: flex; flex-direction: column; }
+    .facilitadora-img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      object-position: top; margin-bottom: 1.5rem;
+      filter: grayscale(20%);
+    }
+    .facilitadora-card h3 {
+      font-size: 1.2rem; font-weight: 300; letter-spacing: -0.01em;
+      color: var(--black); margin-bottom: 0.2rem;
+    }
+    .facilitadora-card h3 strong { font-weight: 700; }
+    .facilitadora-role {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gray-500); margin-bottom: 1rem;
+    }
+    .facilitadora-card p { font-size: 0.88rem; }
+    .facilitadora-card a {
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--black); text-decoration: none; margin-top: 0.5rem;
+      border-bottom: 1px solid var(--gray-200); padding-bottom: 0.2rem;
+      display: inline-block;
+    }
+    .facilitadora-card a:hover { border-color: var(--black); }
+
+    /* ── PRECIO ── */
+    .precio-section { background: var(--white); padding: 6rem 2.5rem; }
+    .precio-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .precio-num {
+      font-size: clamp(4rem, 8vw, 7rem); font-weight: 700;
+      letter-spacing: -0.04em; color: var(--black); line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .precio-sub { font-size: 0.78rem; color: var(--gray-500); margin-bottom: 2.5rem; letter-spacing: 0.05em; }
+    .incluye { margin-bottom: 2rem; }
+    .incluye-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 0.65rem 0; border-bottom: 1px solid var(--gray-200);
+      font-size: 0.88rem; color: var(--gray-700);
+    }
+    .incluye-item:last-child { border-bottom: none; }
+    .incluye-item::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--black); flex-shrink: 0;
+    }
+    .no-incluye { font-size: 0.78rem; color: var(--gray-500); margin-bottom: 2rem; }
+
+    /* ── FORMULARIO ── */
+    .form-section { background: var(--black); padding: 6rem 2.5rem; }
+    .form-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+    }
+    .form-section h2 { color: var(--white); }
+    .form-section .label { color: rgba(255,255,255,0.3); }
+    .form-section p { color: rgba(255,255,255,0.5); }
+    .form-wrap { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    input, textarea {
+      width: 100%; padding: 0.9rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--white); font-family: var(--sans); font-size: 0.9rem;
+      outline: none; border-radius: 4px; transition: border-color 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.25); }
+    input:focus, textarea:focus { border-color: rgba(255,255,255,0.4); }
+    textarea { resize: vertical; min-height: 100px; }
+    .form-note { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 0.5rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.72rem; color: rgba(255,255,255,0.3); margin: 0; }
+    footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .split { grid-template-columns: 1fr; }
+      .split.reverse { direction: ltr; }
+      .senales-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .senales-grid { grid-template-columns: 1fr; }
+      .dias { grid-template-columns: 1fr; }
+      .galeria { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px; }
+      .galeria img:first-child { grid-column: 1 / -1; }
+      .facilitadoras-grid { grid-template-columns: 1fr; }
+      .precio-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .form-inner { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .split-content { padding: 3rem 2rem; }
+      nav { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="display:inline-flex; flex-direction:column;">
+    <a class="nav-logo" href="#">Leadership Spaces</a>
+    <span style="font-size:1.6rem; text-transform:none; color:rgba(255,255,255,0.9); font-weight:600; font-family:'Dancing Script', cursive; margin-top:0.1rem; display:block; text-align:left;">Decision Lab</span>
+  </div>
+  <a class="nav-cta" href="#reservar">Solicitar información</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <video autoplay muted loop playsinline>
+      <source src="rigi-compressed.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="hero-content" style="display:block;">
+    <h1 style="font-size:clamp(2rem, 4.5vw, 4rem); margin-bottom:1.5rem; max-width:55%;"><strong>La calidad de tus decisiones depende del espacio desde el que las tomas.</strong></h1>
+    <a href="#reservar" class="btn" style="align-self:flex-start; background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.4); border-radius:100px;">Quiero saber si encaja conmigo</a>
+  </div>
+  <div style="position:absolute; bottom:4rem; right:2.5rem; z-index:2; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; text-align:right; width:560px;">
+    <p style="color:rgba(255,255,255,0.8); font-size:1.15rem; line-height:1.5; margin:0; width:100%;">Tres días para recuperar claridad, presencia y dirección antes de volver a decidir.</p>
+    <div class="hero-pills" style="width:100%; justify-content:space-between;">
+      <span class="pill">del 23 al 25 de octubre</span>
+      <span class="pill">Programa en español</span>
+    </div>
+    <div class="hero-pills" style="width:100%; justify-content:space-between;">
+      <span class="pill">10 plazas · grupo reducido</span>
+      <span class="pill">Lago de Lucerna (Suiza)</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT: promesa -->
+<div class="split">
+  <div class="split-img">
+    <img src="Grupo_rotada.jpg" alt="Grupo de participantes" />
+  </div>
+  <div class="split-content dark">
+    <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); margin-bottom:1.2rem;">¿Te reconoces?</p>
+    <h2>Tomas decisiones todo el día. Pero las más importantes para ti <strong>siguen esperando.</strong></h2>
+    <ul style="list-style:none; padding:0; margin:1.5rem 0 1.8rem; display:flex; flex-direction:column; gap:1.1rem;">
+      <li style="color:rgba(255,255,255,0.85); font-size:1.05rem; padding-left:1.6rem; position:relative; line-height:1.65;">
+        <span style="position:absolute;left:0;color:rgba(255,255,255,0.35);">—</span>
+        Funcionas bien por fuera, pero internamente vas al límite.
+      </li>
+      <li style="color:rgba(255,255,255,0.85); font-size:1.05rem; padding-left:1.6rem; position:relative; line-height:1.65;">
+        <span style="position:absolute;left:0;color:rgba(255,255,255,0.35);">—</span>
+        El ruido mental no baja, incluso cuando por fin tienes un momento libre.
+      </li>
+      <li style="color:rgba(255,255,255,0.85); font-size:1.05rem; padding-left:1.6rem; position:relative; line-height:1.65;">
+        <span style="position:absolute;left:0;color:rgba(255,255,255,0.35);">—</span>
+        Hay decisiones importantes que sigues aplazando porque nunca llega el espacio adecuado para pensarlas.
+      </li>
+      <li style="color:rgba(255,255,255,0.85); font-size:1.05rem; padding-left:1.6rem; position:relative; line-height:1.65;">
+        <span style="position:absolute;left:0;color:rgba(255,255,255,0.35);">—</span>
+        Te gustaría hablar con personas que entienden de verdad el peso de liderar, sin tener que explicarlo todo desde cero.
+      </li>
+    </ul>
+    <p style="color:rgba(255,255,255,0.75); font-size:0.92rem; margin-bottom:2rem; line-height:1.7;"><strong style="color:var(--white);">Un espacio de intercambio entre iguales,</strong> diseñado para parar el ruido, recuperar claridad y volver a decidir desde un lugar más presente.</p>
+    <a href="#reservar" class="btn btn-white" style="margin-top:0; align-self:flex-start;">Quiero más información</a>
+  </div>
+</div>
+
+<!-- SEÑALES -->
+<section class="senales">
+  <div class="senales-inner">
+    <div class="senales-header">
+      <div>
+        <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); margin-bottom:1.2rem;">Lo que te llevas</p>
+        <h2>Lo que ocurre cuando un líder<br><strong>para de verdad.</strong></h2>
+      </div>
+      <p>No prometemos fórmulas mágicas. Creamos las condiciones para que puedas mirar con claridad lo que el ritmo diario no te deja ver.</p>
+    </div>
+    <div class="senales-grid">
+      <div class="senal">
+        <div class="senal-num">01</div>
+        <p><strong>Distancia.</strong> Salir del ritmo para ver con más claridad.</p>
+      </div>
+      <div class="senal">
+        <div class="senal-num">02</div>
+        <p><strong>Claridad.</strong> Sobre las decisiones que llevas tiempo aplazando.</p>
+      </div>
+      <div class="senal">
+        <div class="senal-num">03</div>
+        <p><strong>Regulación.</strong> Herramientas para responder mejor bajo presión.</p>
+      </div>
+      <div class="senal">
+        <div class="senal-num">04</div>
+        <p><strong>Conversaciones entre iguales.</strong> Con personas que entienden el peso de liderar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section style="background: var(--black); padding: 6rem 2.5rem;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
+      <div>
+        <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); margin-bottom:1.2rem;">Para quién es</p>
+        <h2 style="color: var(--white);">Este retiro es para ti<br><strong>si diriges con peso real.</strong></h2>
+        <p style="color: rgba(255,255,255,0.6);">No se trata solo del cargo, sino del nivel de responsabilidad que sostienes y del impacto de tus decisiones.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div style="padding: 1.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.92rem; line-height:1.7;">Es para ti si eres CEO, founder, directora general, C-level o responsable de área; si lideras equipos, tomas decisiones relevantes y sientes que necesitas parar para recuperar claridad, presencia y dirección.</p>
+        </div>
+        <div style="padding: 1.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.92rem; line-height:1.7;">También es para ti si buscas una conversación honesta con personas que entienden el peso de liderar, sin tener que explicarlo todo desde cero.</p>
+        </div>
+        <div style="padding: 1.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.92rem; line-height:1.7;">El grupo será reducido, hispanohablante y cuidadosamente seleccionado para cuidar la calidad del espacio.</p>
+        </div>
+        <div style="padding: 1.4rem 0;">
+          <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.92rem; line-height:1.7;"><strong style="color:var(--white);">No es un retiro para desconectar sin más.</strong> Es una pausa estratégica para mirar con claridad cómo estás liderando y volver con más foco.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<div class="galeria">
+  <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;">
+    <source src="rigi-playa.mp4" type="video/mp4" />
+  </video>
+  <img src="IMG_1074.jpg" alt="Hotel Rigi Kaltbad con panorama alpino" />
+</div>
+
+<!-- PROGRAMA -->
+<section class="programa">
+  <div class="programa-inner">
+    <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); margin-bottom:1.2rem;">Tres días con intención</p>
+    <h2>Un recorrido diseñado para bajar el ritmo,<br><strong>mirar con claridad y volver con decisiones más conscientes.</strong></h2>
+    <p style="color:rgba(255,255,255,0.5); font-size:0.88rem; margin-top:1rem; margin-bottom:0;">Cada día combinará espacios de coaching, reflexión individual, conversación entre iguales, movimiento suave, naturaleza y pausas reales.</p>
+    <div class="dias" style="margin-top:3rem;">
+      <div class="dia">
+        <p class="dia-num">Día 1</p>
+        <h3><strong>Parar y hacer visible</strong> el ruido</h3>
+        <ul style="list-style:none; padding:0; margin-top:1.2rem; display:flex; flex-direction:column; gap:0.5rem;">
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Bajar la velocidad.</li>
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Hacer visible el ruido interno.</li>
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Pasar del modo respuesta al modo presencia.</li>
+        </ul>
+      </div>
+      <div class="dia">
+        <p class="dia-num">Día 2</p>
+        <h3><strong>Mirar cómo lideras</strong> bajo presión</h3>
+        <ul style="list-style:none; padding:0; margin-top:1.2rem; display:flex; flex-direction:column; gap:0.5rem;">
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Observar tus patrones y tu forma de decidir.</li>
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Regulación bajo presión y contacto con la naturaleza.</li>
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Conversación grupal y reflexión individual.</li>
+        </ul>
+      </div>
+      <div class="dia">
+        <p class="dia-num">Día 3</p>
+        <h3><strong>Volver</strong> con dirección</h3>
+        <ul style="list-style:none; padding:0; margin-top:1.2rem; display:flex; flex-direction:column; gap:0.5rem;">
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Integración y cierre.</li>
+          <li style="color:rgba(255,255,255,0.6); font-size:0.88rem; position:relative;">Plan de retorno: decisiones y próximos pasos.</li>
+          <li style="color:rgba(255,255,255,0.85); font-size:0.88rem; position:relative; font-style:italic;">Volver mirando distinto.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SPLIT: el lugar -->
+<div class="split reverse">
+  <div class="split-img" style="overflow:hidden;">
+    <img src="IMG_1089.jpg" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center top;" alt="Vista desde el Rigi hacia el Lago de Lucerna" />
+  </div>
+  <div class="split-content">
+    <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); margin-bottom:1.2rem;">El lugar</p>
+    <h2><strong>Un entorno que también<br>forma parte del proceso.</strong></h2>
+    <p>A veces no basta con cerrar el ordenador o liberar unas horas de la agenda. Para pensar de otra manera, también necesitamos cambiar de entorno. Por eso este retiro se celebra en la montaña, sobre el Lago de Lucerna: lejos del ruido habitual, rodeados de naturaleza, agua y silencio.</p>
+    <p>La distancia física ayuda a crear distancia interna. Permite bajar el ritmo, recuperar perspectiva y escuchar con más claridad lo que en el día a día suele quedar bajo la exigencia.</p>
+  </div>
+</div>
+
+<!-- HOTEL -->
+<section class="hotel">
+  <div class="hotel-inner">
+    <div class="hotel-intro">
+      <div>
+        <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); margin-bottom:1.2rem;">El espacio</p>
+        <h2><strong>Hotel Rigi Kaltbad</strong></h2>
+      </div>
+      <div>
+        <p>El retiro tendrá lugar en el Hotel Rigi Kaltbad, a 1.400 metros de altura, en uno de los enclaves más especiales de Suiza central.</p>
+        <p>Un lugar sin coches, rodeado de montaña y con vistas al Lago de Lucerna, que combina calma, comodidad y acceso directo a la naturaleza.</p>
+        <p>El hotel ofrece habitaciones individuales, espacios para el trabajo grupal, gastronomía cuidada y acceso al Mineralbad & Spa: un entorno pensado para descansar el cuerpo, abrir espacio mental y acompañar el trabajo profundo del retiro.</p>
+        <div style="display:flex; gap:0; margin-top:1.5rem; border:1.5px solid var(--black);">
+          <span style="font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.5rem 1.2rem; color:var(--black); flex:1; text-align:center; border-right:1.5px solid var(--black);">Habitación individual</span>
+          <span style="font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.5rem 1.2rem; color:var(--black); flex:1; text-align:center; border-right:1.5px solid var(--black);">Spa incluido</span>
+          <span style="font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:0.5rem 1.2rem; color:var(--black); flex:1; text-align:center;">Hotel sin coches</span>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-grid">
+      <img src="https://swissqualityhotels.com/wp-content/uploads/2023/02/Wellness-Area-10.webp" alt="Piscina exterior con vistas al Lago de Lucerna" />
+      <img src="https://swissqualityhotels.com/wp-content/uploads/2023/02/Rigibahn-mit-Aussicht-2000x1000.jpg" alt="Tren del Rigi con vistas al Lago de Lucerna" />
+      <img src="https://swissqualityhotels.com/wp-content/uploads/2023/02/Wellness-Area-1-4-scaled-2800x1120.webp" alt="Baño mineral interior Mario Botta" />
+      <img src="Habitacion%20individual.png" alt="Habitación con vistas a la montaña — Hotel Rigi Kaltbad" />
+      <img src="https://swissqualityhotels.com/wp-content/uploads/2023/02/Restaurant-Sunset-1-scaled-2800x1120.webp" alt="Restaurant Sunset" />
+    </div>
+    <div class="hotel-footer">
+      <p>Hotel Rigi Kaltbad · Rigi Kaltbad, Suiza · 1.400m · Car-free · Acceso directo al Mineralbad & Spa Mario Botta</p>
+      <a href="https://en.hotelrigikaltbad.ch" target="_blank">hotelrigikaltbad.ch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITADORAS -->
+<section class="facilitadoras" style="background: var(--gray-100);">
+  <div class="facilitadoras-inner">
+    <span class="label">Facilitadores</span>
+    <h2>Tres miradas.<br><strong>Un mismo propósito.</strong></h2>
+    <p style="max-width:1100px; margin-bottom:0.8rem;">Tres trayectorias complementarias para acompañar una pausa profunda, estratégica y corporal.</p>
+    <p style="max-width:1100px; margin-bottom:0.8rem;">Este retiro nace de la unión entre el coaching ejecutivo, el desarrollo personal y el trabajo somático. Juntos creamos un espacio que integra mente, cuerpo, emoción y acción.</p>
+    <p style="max-width:1100px; margin-bottom:3rem;">Porque liderar no es solo tomar decisiones: también es sostener energía, regular la presión, mantener la presencia y volver al cuerpo cuando el estrés se acumula.</p>
+    <div class="facilitadoras-grid">
+      <div class="facilitadora-card">
+        <img class="facilitadora-img"
+          src="rocio.jpg"
+          alt="Rocío Caro"
+          style="object-position: center 8%;" />
+        <h3><strong>Rocío Caro</strong></h3>
+        <p class="facilitadora-role">Executive Coach ACC (ICF) | PNL Practitioner | Arquitecta | Sostenibilidad | People + Spaces</p>
+        <p>Rocío trabaja con líderes que quieren cambiar la forma en que lideran: gestionar mejor la presión, manejar sus propias emociones, decidir con más claridad y liderar con más presencia. Tiene un ojo entrenado para detectar cuándo el problema que se ve no es el problema real, y acompaña a cambiar la perspectiva desde la que se observa.</p>
+        <p>Durante años diseñó espacios para que las personas trabajaran mejor. Hoy acompaña a quienes dirigen equipos y organizaciones a hacer lo mismo con su forma de liderar. Su trayectoria —arquitectura, entornos corporativos y coaching ejecutivo— le da una mirada singular sobre cómo los líderes pueden transformar su forma de estar y decidir.</p>
+        <a href="https://www.innerpathcoaching.com" target="_blank">innerpathcoaching.com →</a>
+      </div>
+      <div class="facilitadora-card">
+        <img class="facilitadora-img"
+          src="Bea.jpg"
+          alt="Bea de la Sen" />
+        <h3><strong>Beatriz de la Sen</strong></h3>
+        <p class="facilitadora-role">Executive Coach ICF (ACC) | PNL Practitioner | Psicóloga | Liderazgo | Comunicación Estratégica</p>
+        <p>Bea combina más de 15 años de experiencia en entornos corporativos internacionales con una sólida formación en Psicología y Coaching Ejecutivo. Su mayor fortaleza está en leer entre líneas, identificar patrones y generar conversaciones que aportan claridad allí donde otros solo ven complejidad.</p>
+        <p>Su experiencia trabajando con líderes y equipos en proyectos internacionales le permite comprender los retos del mundo corporativo desde dentro y crear el espacio necesario para que emerjan conversaciones honestas, nuevas perspectivas y mejores decisiones.</p>
+        <a href="https://beadelasen.com" target="_blank">beadelasen.com →</a>
+      </div>
+      <div class="facilitadora-card">
+        <img class="facilitadora-img"
+          src="Roel.jpg"
+          alt="Roel Vlaming" />
+        <h3><strong>Roel Vlaming</strong></h3>
+        <p class="facilitadora-role">Advanced Wim Hof Method Instructor · Breathwork & Cold Exposure</p>
+        <p>Nacido en Amsterdam y afincado en Suiza, Roel es instructor avanzado certificado del Método Wim Hof. Trabaja con la respiración, la exposición al frío y la regulación del sistema nervioso como herramientas de transformación física y mental.</p>
+        <p>Su práctica ofrece a los líderes una experiencia directa de regulación bajo presión: cómo el cuerpo responde al estrés y cómo entrenarlo para recuperar calma, foco y presencia en momentos de alta exigencia.</p>
+        <a href="https://activities.wimhofmethod.com/activities/whm-fundamentals-workshop-zug-roel-vlaming-2/72280" target="_blank">wimhofmethod.com →</a>
+      </div>
+    </div>
+    <p style="max-width:1100px; margin-top:3rem; font-style:italic; color:#6b6b6b; font-size:0.92rem; line-height:1.75;">Juntos creamos un espacio cuidado, honesto y exigente en el mejor sentido: un lugar donde parar no significa desconectar de la realidad, sino volver a ella con más claridad, presencia y dirección.</p>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section class="precio-section">
+  <div class="precio-inner">
+    <div>
+      <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); margin-bottom:1.2rem;">Inversión</p>
+      <h2>Una pausa estratégica<br><strong>para volver con más claridad.</strong></h2>
+      <p>La inversión por persona es de:</p>
+      <p class="precio-num">2.500 CHF</p>
+      <p class="precio-sub">aprox. 2.720 € · por persona · habitación individual</p>
+    </div>
+    <div>
+      <div class="incluye">
+        <div class="incluye-item">Programa completo del retiro durante los tres días</div>
+        <div class="incluye-item">Alojamiento en habitación individual</div>
+        <div class="incluye-item">Desayunos, comidas y cenas incluidas durante el retiro</div>
+        <div class="incluye-item">Espacios de coaching, reflexión individual y conversación grupal</div>
+        <div class="incluye-item">Material de trabajo e integración</div>
+        <div class="incluye-item">Acceso al Mineralbad & Spa del hotel</div>
+        <div class="incluye-item">Grupo reducido y cuidadosamente seleccionado</div>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray-500); margin-bottom:0.6rem;">No incluye</p>
+        <p style="font-size:0.85rem; color:var(--gray-500); margin:0; line-height:1.7;">— Desplazamiento hasta el hotel<br>— Seguro personal<br>— Consumos o servicios extra no especificados</p>
+      </div>
+      <p style="font-size:0.88rem; color:var(--gray-700); line-height:1.75; margin-bottom:2rem;">Antes de reservar tendremos una conversación breve para asegurarnos de que este retiro es realmente para ti.</p>
+      <a href="#reservar" class="btn btn-dark">Solicitar información</a>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section class="form-section" id="reservar">
+  <div class="form-inner">
+    <div>
+      <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); margin-bottom:1.2rem;">Solicitud de información</p>
+      <h2>¿Sientes que este retiro<br><strong>podría ser para ti?</strong></h2>
+      <p style="color:rgba(255,255,255,0.6);">Déjanos tus datos y te contactaremos para una llamada breve. Queremos conocer tu contexto, resolver tus dudas y valorar juntos si este retiro encaja con el momento en el que estás.</p>
+      <p style="color:rgba(255,255,255,0.6); margin-bottom:2rem;">El grupo será reducido y cuidadosamente seleccionado para cuidar la calidad del espacio, la conversación y la experiencia.</p>
+      <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:0.8rem;">Qué ocurre después</p>
+      <ol style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.5rem;">
+        <li style="color:rgba(255,255,255,0.55); font-size:0.85rem;"><span style="color:rgba(255,255,255,0.25); margin-right:0.6rem;">1.</span>Rellenas el formulario.</li>
+        <li style="color:rgba(255,255,255,0.55); font-size:0.85rem;"><span style="color:rgba(255,255,255,0.25); margin-right:0.6rem;">2.</span>Te contactamos en un plazo máximo de 48 horas.</li>
+        <li style="color:rgba(255,255,255,0.55); font-size:0.85rem;"><span style="color:rgba(255,255,255,0.25); margin-right:0.6rem;">3.</span>Tenemos una llamada breve para conocerte y responder tus preguntas.</li>
+        <li style="color:rgba(255,255,255,0.55); font-size:0.85rem;"><span style="color:rgba(255,255,255,0.25); margin-right:0.6rem;">4.</span>Si por ambas partes encaja, te enviaremos los detalles de reserva.</li>
+      </ol>
+      <p style="font-size:0.78rem; color:rgba(255,255,255,0.3); margin-top:1.5rem;">No necesitas tenerlo todo claro ahora. Este primer paso es simplemente para abrir la conversación.</p>
+    </div>
+    <div>
+      <form class="form-wrap">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" placeholder="Tu nombre completo" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="tu@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="telefono">WhatsApp</label>
+          <input type="text" id="telefono" placeholder="+34 600 000 000" />
+        </div>
+        <div class="form-group">
+          <label for="rol">Cargo</label>
+          <input type="text" id="rol" placeholder="CEO, Directora, Fundador..." />
+        </div>
+        <div class="form-group">
+          <label for="necesidad">¿Qué necesitas parar, ordenar o decidir en este momento?</label>
+          <textarea id="necesidad" placeholder="Cuéntanos brevemente..." style="min-height:120px;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-white" style="width:100%;">Solicitar llamada</button>
+        <p class="form-note">Tu información no se comparte con terceros.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Leadership Spaces · Retiro para líderes · Lago de Lucerna · Suiza 2026</p>
+  <p><a href="mailto:info@innerpathcoaching.com">info@innerpathcoaching.com</a></p>
+</footer>
+
+</body>
+</html>
