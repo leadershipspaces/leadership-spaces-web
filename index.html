@@ -349,6 +349,15 @@
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .split-content { padding: 3rem 2rem; }
       nav { padding: 1rem 1.5rem; }
+      .hero { height: auto; min-height: 100svh; justify-content: flex-end; }
+      .hero-content { padding: 0 1.5rem 2rem; }
+      .hero-content h1 { max-width: 100% !important; font-size: clamp(1.6rem, 6vw, 2.2rem) !important; }
+      .hero-right-block { display: none !important; }
+      .para-quien-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      .hotel-intro { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .hotel-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+      .hotel-grid img:first-child { grid-row: auto !important; grid-column: 1 / -1; }
+      .hotel-footer { flex-direction: column; gap: 0.8rem; text-align: center; }
     }
   </style>
 </head>
@@ -374,7 +383,7 @@
     <h1 style="font-size:clamp(2rem, 4.5vw, 4rem); margin-bottom:1.5rem; max-width:55%;"><strong>La calidad de tus decisiones depende del espacio desde el que las tomas.</strong></h1>
     <a href="#reservar" class="btn" style="align-self:flex-start; background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.4); border-radius:100px;">Quiero saber si encaja conmigo</a>
   </div>
-  <div style="position:absolute; bottom:4rem; right:2.5rem; z-index:2; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; text-align:right; width:560px;">
+  <div class="hero-right-block" style="position:absolute; bottom:4rem; right:2.5rem; z-index:2; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; text-align:right; width:560px;">
     <p style="color:rgba(255,255,255,0.8); font-size:1.15rem; line-height:1.5; margin:0; width:100%;">Tres días para recuperar claridad, presencia y dirección antes de volver a decidir.</p>
     <div class="hero-pills" style="width:100%; justify-content:space-between;">
       <span class="pill">del 23 al 25 de octubre</span>
@@ -452,7 +461,7 @@
 <!-- PARA QUIÉN -->
 <section style="background: var(--black); padding: 6rem 2.5rem;">
   <div style="max-width: 1100px; margin: 0 auto;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
+    <div class="para-quien-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
       <div>
         <p style="font-size:1rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--white); margin-bottom:1.2rem;">Para quién es</p>
         <h2 style="color: var(--white);">Este retiro es para ti<br><strong>si diriges con peso real.</strong></h2>
@@ -692,7 +701,7 @@
 <!-- FOOTER -->
 <footer>
   <p>Leadership Spaces · Retiro para líderes · Lago de Lucerna · Suiza 2026</p>
-  <p><a href="mailto:info@innerpathcoaching.com">info@innerpathcoaching.com</a></p>
+  <p><a href="mailto:info@leadershipspaces.com">info@leadershipspaces.com</a></p>
 </footer>
 
 </body>
