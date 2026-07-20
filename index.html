@@ -350,9 +350,21 @@
       .split-content { padding: 3rem 2rem; }
       nav { padding: 1rem 1.5rem; }
       .hero { height: auto; min-height: 100svh; justify-content: flex-end; }
-      .hero-content { padding: 0 1.5rem 2rem; }
+      .hero-content { padding: 0 1.5rem 0.8rem; }
       .hero-content h1 { max-width: 100% !important; font-size: clamp(1.6rem, 6vw, 2.2rem) !important; }
-      .hero-right-block { display: none !important; }
+      .hero-right-block {
+        display: flex !important;
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        padding: 0 1.5rem 2.5rem !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 0.8rem !important;
+      }
+      .hero-right-block > p { display: none; }
+      .hero-right-block .hero-pills { width: 100% !important; justify-content: flex-start !important; gap: 0.6rem !important; }
       .para-quien-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
       .hotel-intro { grid-template-columns: 1fr !important; gap: 2rem !important; }
       .hotel-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
