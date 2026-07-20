@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    .hero-cta-mobile { display: none; }
 
     :root {
       --black: #0a0a0a;
@@ -364,6 +365,8 @@
         gap: 0.8rem !important;
       }
       .hero-right-block > p { display: none; }
+      .hero-cta-desktop { display: none !important; }
+      .hero-cta-mobile { display: inline-block !important; }
       .hero-right-block .hero-pills { width: 100% !important; justify-content: flex-start !important; gap: 0.6rem !important; }
       .para-quien-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
       .hotel-intro { grid-template-columns: 1fr !important; gap: 2rem !important; }
@@ -393,7 +396,7 @@
   </div>
   <div class="hero-content" style="display:block;">
     <h1 style="font-size:clamp(2rem, 4.5vw, 4rem); margin-bottom:1.5rem; max-width:55%;"><strong>La calidad de tus decisiones depende del espacio desde el que las tomas.</strong></h1>
-    <a href="#reservar" class="btn" style="align-self:flex-start; background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.4); border-radius:100px;">Quiero saber si encaja conmigo</a>
+    <a href="#reservar" class="btn hero-cta-desktop" style="align-self:flex-start; background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.4); border-radius:100px;">Quiero saber si encaja conmigo</a>
   </div>
   <div class="hero-right-block" style="position:absolute; bottom:4rem; right:2.5rem; z-index:2; display:flex; flex-direction:column; align-items:flex-end; gap:1rem; text-align:right; width:560px;">
     <p style="color:rgba(255,255,255,0.8); font-size:1.15rem; line-height:1.5; margin:0; width:100%;">Tres días para recuperar claridad, presencia y dirección antes de volver a decidir.</p>
@@ -405,6 +408,7 @@
       <span class="pill" style="font-size:0.8rem; font-weight:600; padding:0.6rem 1.2rem;">Programa en español</span>
       <span class="pill" style="font-size:0.8rem; font-weight:600; padding:0.6rem 1.2rem;">Lago de Lucerna (Suiza)</span>
     </div>
+    <a href="#reservar" class="btn hero-cta-mobile" style="background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.4); border-radius:100px; margin-top:2rem;">Quiero saber si encaja conmigo</a>
   </div>
 </section>
 
